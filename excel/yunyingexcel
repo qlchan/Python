@@ -1,0 +1,30 @@
+#!/usr/bin/env python
+#coding:utf-8
+import sys
+'''
+ author : cql 2016/1/26
+ 专门为运营做数据导出
+'''
+print '\033[1;31;40m'
+print '*' * 50
+print '---------------------begin out data-------------------------'
+print '--------------------注意事项-本工具只用于运营活动-----------'
+print '--------1、用户名和 密码 用自己申请的账号密码---------------'
+print '--------2、sql 查询的字段 要和excel第一行所在的列的字段对应-----'
+print '--------3、在一个自己常用的文件夹内执行sudo yunyinexcel -------'
+print '--------------------别装逼改源码----------------------------'
+print '*' * 50
+print '\033[0m'
+sys.path.append('/data1/excel')
+
+import out
+
+
+if __name__ == '__main__':
+    host = 'g1-off-ku-real.dns.ganji.com'
+    user = raw_input("数据库用户名:  ")
+    password = raw_input("数据库密码:   ")
+    sql = raw_input("请输入你的sql语句:   ")
+    #'用户id','手机号','ip','中奖类型','中奖时间'
+    table_str = raw_input("表格的字段(eg:中国1,中国2,中国3,中国4,中国5):   ")
+    out.outExcel(host, user, password, sql, table_str.decode('utf-8'))
