@@ -1,28 +1,21 @@
 #coding:utf-8
 '''
-Created on 2016锟斤拷1锟斤拷20锟斤拷
-
 @author: chengqinglong
 '''
 import MySQLdb
-from _mysql import result
 
 class MyDBConnect(object):
-    '''
-      锟斤拷菘锟斤拷锟斤拷锟�
-    '''
 
-
-    def __init__(self, host, user, password):
+    def __init__(self, host, user, password ):
         '''
         Constructor
         '''
         self.db_connect(host, user, password )
         
         
-    def db_connect(self , host , user, password ):
+    def db_connect(self , host , user, password  ):
         try:
-            conn = MySQLdb.connect( host  , user  , password  , port=3499 )
+            conn = MySQLdb.connect( host  , user  , password , port=3499 )
             conn.select_db('ganji_ms')
             self.connect = conn
             #return conn
@@ -43,13 +36,13 @@ class MyDBConnect(object):
         cur.close()
         self.connect.close()
         
-    def selectData(self , time , type):
+    def selectData(self , sql ):
         cur = self.connect.cursor()
-        timeDate = [ time ]
-        if ( type == '1' ):
-            cur.execute("select * from ny_user_award where award !='no_award' and date (createtime) >= %s" , timeDate )
-        else:
-            cur.execute("select * from ny_user_award where award !='no_award' and date (createtime) = %s" , timeDate )
+       # timeDate = [ time ]
+       # if ( type == '1' ):
+        cur.execute( sql   )
+        #else:
+        #    cur.execute("select * from ny_user_award where award !='no_award' and date (createtime) = %s" , timeDate )
         result = cur.fetchall()
         cur.close()
         self.connect.close()
